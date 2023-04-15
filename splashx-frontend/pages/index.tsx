@@ -1,4 +1,6 @@
 import Layout from "@/components/Layout";
+import VideoCard from "@/components/VideoCard";
+import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -15,11 +17,13 @@ export default function Home() {
           Splash X
         </h1>
         <div className="flex h-screen flex-col bg-gradient-to-b from-gray-900 to-slate-800 text-white">
-          <main className="flex-1">
+          <main>
             <section className="text-center">
-              <h2 className="text-center text-3xl font-medium">
-                Welcome to Splash X
-              </h2>
+              <Flex justify={"center"} align={"center"} flexWrap={"wrap"}>
+                <VideoCard />
+                <VideoCard />
+                <VideoCard />
+              </Flex>
             </section>
           </main>
 

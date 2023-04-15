@@ -152,7 +152,7 @@ export default function Navbar() {
 
           {address ? (
             <Button
-              bgColor="brand.purple"
+              bgColor="brand.brightBlue"
               textColor="white"
               // TODO: add disconnect handler
               onClick={() => disconnect()}
@@ -164,7 +164,7 @@ export default function Navbar() {
             </Button>
           ) : (
             <Button
-              bgColor="brand.purple"
+              bgColor="brand.brightBlue"
               textColor="white"
               // onClick={connectMetamask}
               onClick={async () => {
@@ -189,7 +189,7 @@ export default function Navbar() {
               fontSize={"sm"}
               fontWeight={600}
               color={"white"}
-              bg={"brand.purple"}
+              bg={"brand.brightBlue"}
               _hover={{
                 bg: "pink.300",
               }}
@@ -232,7 +232,8 @@ export default function Navbar() {
         top={"76px"}
         paddingX={"8"}
         position={"fixed"}
-        className="bg-gradient-to-b from-gray-900  to-slate-700"
+        // className="bg-gradient-to-b from-gray-900  to-slate-700"
+        className="none"
       >
         <DesktopNav />
       </Flex>
@@ -269,7 +270,7 @@ const DesktopNav = () => {
                   fontWeight={"Bold"}
                 >
                   <Image src={navItem.icon} alt="Nav Icon" />
-                  {navItem.label}
+                  {/* {navItem.label} */}
                 </Flex>
               </Link>
             </PopoverTrigger>
@@ -367,24 +368,24 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/",
     icon: "/images/home.svg",
   },
-  {
-    label: "My Profile",
-    href: "/MyProfile",
-    icon: "/images/user-circle.svg",
-  },
+  // {
+  //   label: "My Profile",
+  //   href: "/MyProfile",
+  //   icon: "/images/user-circle.svg",
+  // },
   {
     label: "Earnings",
-    href: "/Earnings",
+    href: "/earnings",
     icon: "/images/currency-dollar.svg",
   },
-  {
-    label: "DAO",
-    href: "#",
-    icon: "/images/view-grid.svg",
-  },
+  // {
+  //   label: "DAO",
+  //   href: "#",
+  //   icon: "/images/view-grid.svg",
+  // },
   {
     label: "Your Videos",
-    href: "/YourVideo",
+    href: "/upload",
     icon: "/images/video-camera.svg",
   },
 ];
