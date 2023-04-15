@@ -13,24 +13,24 @@ type Props = {};
 const data = [
   {
     name: "Segun Adebayo",
-    balance: "sage@chakra.com",
+    balance: "230 APE",
   },
   {
     name: "Josef Nikolas",
-    balance: "Josef@mail.com",
+    balance: "190 APE",
   },
   {
     name: "Lazar Nikolov",
-    balance: "Lazar@mail.com",
+    balance: "20 BOB",
   },
   {
     name: "Abraham",
-    balance: "abraham@anu.com",
+    balance: "10 SPLASHx",
   },
 ];
 
 const Table = (props: Props) => {
-  const dataColor = useColorModeValue("gray.600", "gray.800");
+  const dataColor = useColorModeValue("white", "gray.800");
   const bg = useColorModeValue("gray.700", "gray.800");
   const bg2 = useColorModeValue("gray.700", "gray.900");
   return (

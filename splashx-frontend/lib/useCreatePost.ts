@@ -112,7 +112,8 @@ export function useCreatePost(): any {
     console.log("contentURI: ", contentURI);
 
     const tx = await lensHubContract.call("postWithSig", {
-      profileId: profileId,
+      // @ts-ignore
+      profileId: "0x69b8",
       contentURI: contentURI,
       collectModule,
       collectModuleInitData,

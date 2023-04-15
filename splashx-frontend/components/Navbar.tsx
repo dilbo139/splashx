@@ -132,7 +132,7 @@ export default function Navbar() {
           </Link> */}
           <Link
             href="/"
-            className="shadow-md-secondary mb-6 text-center text-5xl font-bold text-primary drop-shadow-[3px_3px_3px_#dc2626]"
+            className="shadow-md-secondary mb-6 text-center text-5xl font-bold text-cyan-500 drop-shadow-[3px_3px_3px_#00c9ff]"
           >
             SplashX&nbsp;.
           </Link>

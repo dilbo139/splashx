@@ -13,6 +13,7 @@ import {
   Textarea,
   VisuallyHiddenInput,
   VisuallyHidden,
+  Select,
 } from "@chakra-ui/react";
 
 import useLensUser from "@/lib/auth/useLensUser";
@@ -27,6 +28,10 @@ const UploadForm: React.FC = () => {
   const handleToggle = () => setShow(!show);
   const [video, setVideo] = useState<File | null>(null);
   const [title, setTitle] = useState<string>("");
+  const [coin, setCoin] = useState<{ address: string; symbol: string }>({
+    address: "",
+    symbol: "",
+  });
   const [description, setDescription] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [error, setError] = useState("");
@@ -37,6 +42,27 @@ const UploadForm: React.FC = () => {
   const { mutateAsync: createPost } = useCreatePost();
 
   const address = useAddress();
+
+  const coins = [
+    { address: "0x28022C5Aa896BB75c010b499E12b7B5A8D5c674C", symbol: "APEx" },
+    { address: "0xE30437DA87F308938E18241d55Ff68d92155a0ca", symbol: "BOBx" },
+    {
+      address: "0xeB413095eDa7fe1aB70c94414F9f04F6EFbC1371",
+      symbol: "SPLASHx on Gnosis",
+    },
+    {
+      address: "0x48E703868C0653250aBAEb944B9ACb2Abf4d4272",
+      symbol: "SPLASHx on Scroll",
+    },
+    {
+      address: "0xeB413095eDa7fe1aB70c94414F9f04F6EFbC1371",
+      symbol: "SPLASHx on Taiko",
+    },
+    {
+      address: "0xCc52f0866050E6Ad5BD30E1E45f221a5Db5df6aa",
+      symbol: "SPLASHx on Celo",
+    },
+  ];
 
   const handlePost = async (e: any) => {
     e.preventDefault();
@@ -118,7 +144,7 @@ const UploadForm: React.FC = () => {
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
-          paddingBottom={"5"}
+          marginBottom={"100px"}
           gap={9}
         >
           <Text fontSize={"2xl"} fontWeight={"500"} onClick={handleToggle}>
@@ -202,6 +228,11 @@ const UploadForm: React.FC = () => {
               onChange={(e) => setDescription(e.target.value)}
               value={description}
             />
+            <Select placeholder="Select payout coin">
+              {coins.map((coin, index) => {
+                return <option key={index} value={coin.symbol}></option>;
+              })}
+            </Select>
           </Box>
         </Flex>
         {/* stake box */}
@@ -214,11 +245,11 @@ const UploadForm: React.FC = () => {
             justifyContent={"center"}
             paddingX={{ base: "10", md: "10" }}
             paddingY={{ base: "5", md: "10" }}
-            marginY={"10"}
+            marginY={"10px"}
             borderRadius={"13px"}
-            mt={{ base: "10" }}
+            mt={{ base: "90px" }}
           >
-            <Flex gap={"10"} flexDirection={{ base: "column", md: "row" }}>
+            <Flex gap={12} flexDirection={{ base: "column", md: "row" }}>
               <Box
                 display={"flex"}
                 alignItems={{ base: "center", md: "center" }}
