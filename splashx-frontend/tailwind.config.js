@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   content: [
     "./pages/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
@@ -9,6 +10,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/typography"),
     require("daisyui"),
-    require("prettier-plugin-tailwindcss")
+    require("prettier-plugin-tailwindcss"),
   ],
 };
