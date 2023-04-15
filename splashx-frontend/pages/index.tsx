@@ -3,8 +3,37 @@ import VideoCard from "@/components/VideoCard";
 import { Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Script from "next/script";
+import {
+  PublicationSortCriteria,
+  useExplorePublicationsQuery,
+} from "@/graphql/generated";
 
 export default function Home() {
+  const {
+    isLoading,
+    error,
+    data: publicationsData,
+  } = useExplorePublicationsQuery(
+    {
+      request: {
+        sortCriteria: PublicationSortCriteria.Latest,
+        limit: 3,
+      },
+    },
+    {
+      // Don't refetch the user comes back
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  console.log("publicationsData: ", publicationsData);
+
+  const playbackIds: string[] = [
+    "0b71y791z0b1fobx",
+    "c93am2dgf19jh5r6",
+    "3952s8oa25gk57sw",
+  ];
   return (
     <div>
       <Head>
@@ -20,9 +49,17 @@ export default function Home() {
           <main>
             <section className="text-center">
               <Flex justify={"center"} align={"center"} flexWrap={"wrap"}>
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
+                {publicationsData?.explorePublications.items.map((pub, i) => {
+                  return (
+                    <VideoCard
+                      key={i}
+                      author={pub.profile.handle}
+                      playbackId={playbackIds[i]}
+                    />
+                  );
+                })}
+                {/* <VideoCard />
+                <VideoCard /> */}
               </Flex>
             </section>
           </main>

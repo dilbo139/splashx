@@ -12,6 +12,7 @@ import {
   createReactClient,
   studioProvider,
 } from "@livepeer/react";
+import { useMemo } from "react";
 
 const chakraTheme: ThemeConfig = extendTheme({
   styles: {
@@ -55,18 +56,30 @@ const livepeerTheme: LivepeerThemeConfig = {
   },
 };
 
-const liverpeerClient = createReactClient({
-  provider: studioProvider({ apiKey: "yourStudioApiKey" }),
-});
+const livepeerKey = "567b25c3-5ee2-4889-b3d0-ed04467dfa1a";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const liverpeerClient = useMemo(
+    () =>
+      createReactClient({
+        provider: studioProvider({
+          apiKey: "567b25c3-5ee2-4889-b3d0-ed04467dfa1a",
+        }),
+      }),
+    []
+  );
+
   return (
     <MetaMaskProvider>
       <ThirdwebProvider activeChain={desiredChainId}>
         <QueryClientProvider client={queryClient}>
           <SdkLayout>
             <ChakraProvider resetCSS theme={chakraTheme}>
-              <LivepeerConfig client={liverpeerClient} theme={livepeerTheme}>
+              <LivepeerConfig
+                client={liverpeerClient}
+                theme={livepeerTheme}
+                dehydratedState={pageProps?.dehydratedState}
+              >
                 <Component {...pageProps} />
               </LivepeerConfig>
             </ChakraProvider>

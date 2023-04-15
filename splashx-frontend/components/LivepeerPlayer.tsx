@@ -1,45 +1,28 @@
-import React from "react";
 import { Player } from "@livepeer/react";
-
 import Image from "next/image";
-// import blenderPoster from "../../public/images/video-camera.svg";
+import * as React from "react";
 
-type Props = {};
-
-const playbackId =
-  "bafybeida3w2w7fch2fy6rfvfttqamlcyxgd3ddbf4u25n7fxzvyvcaegxy";
+import rickRollPoster from "../public/images/rick.jpeg";
 
 const PosterImage = () => {
   return (
-    <Image
-      src={"/images/video-camera.svg"}
-      layout="fill"
-      objectFit="cover"
-      priority
-      // placeholder="blur"
-      alt={""}
-    />
+    <Image src={rickRollPoster} priority placeholder="blur" alt="waterfall" />
   );
 };
 
-const LivepeerPlayer = (props: Props) => {
+const playbackId =
+  "bafybeigtqixg4ywcem3p6sitz55wy6xvnr565s6kuwhznpwjices3mmxoe";
+
+export default function LivepeerPlayer() {
   return (
     <Player
       title="Waterfalls"
-      playbackId={playbackId}
-      showPipButton
+      playbackId={"c93am2dgf19jh5r6"}
+      loop
+      autoPlay
       showTitle={false}
-      aspectRatio="16to9"
+      muted
       poster={<PosterImage />}
-      controls={{
-        autohide: 3000,
-      }}
-      theme={{
-        borderStyles: { containerBorderStyle: "solid" },
-        radii: { containerBorderRadius: "10px" },
-      }}
     />
   );
-};
-
-export default LivepeerPlayer;
+}
