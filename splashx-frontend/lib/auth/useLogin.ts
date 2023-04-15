@@ -1,13 +1,12 @@
 import { STORAGE_KEY } from "@/utils/constants";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useSDK } from "@thirdweb-dev/react";
-import { useAuthenticateMutation } from "../../graphql/generated";
+import { useAddress, useSDK } from "@thirdweb-dev/react";
+import { useAuthenticateMutation } from "@/graphql/generated";
 import generateChallenge from "./generateChallenge";
 import { setAccessToken } from "./helpers";
-import useMetamask from "@/hooks/useMetamask";
 
 export default function useLogin() {
-  const { address } = useMetamask();
+  const address = useAddress();
   const sdk = useSDK();
   const { mutateAsync: sendSignedMessage } = useAuthenticateMutation();
   const client = useQueryClient();

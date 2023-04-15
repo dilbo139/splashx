@@ -3,10 +3,11 @@ import { readAccessToken } from "./helpers";
 import { useDefaultProfileQuery } from "../../graphql/generated";
 import { STORAGE_KEY } from "@/utils/constants";
 import useMetamask from "@/hooks/useMetamask";
+import { useAddress } from "@thirdweb-dev/react";
 
 export default function useLensUser() {
   // 1. Make a react query for the local storage Key
-  const address = useMetamask();
+  const address = useAddress();
 
   const localStorageQuery: UseQueryResult<
     {
@@ -34,7 +35,7 @@ export default function useLensUser() {
     }
   );
 
-  console.log(profileQuery.data?.defaultProfile);
+  console.log("defaultProfile: ", profileQuery.data?.defaultProfile);
 
   return {
     // Contains information about both the local storage

@@ -25,28 +25,39 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-import React, { useEffect } from "react";
-import useMetamask from "@/hooks/useMetamask";
+import React, { useEffect, useState } from "react";
+// import useMetamask from "@/hooks/useMetamask";
 import { useListen } from "@/hooks/useListen";
 import MetaMaskSDK from "@metamask/sdk";
-import { useNetworkMismatch } from "@thirdweb-dev/react";
+import {
+  useAddress,
+  useDisconnect,
+  useMetamask,
+  useNetworkMismatch,
+} from "@thirdweb-dev/react";
 import useLensUser from "@/lib/auth/useLensUser";
 import useLogin from "@/lib/auth/useLogin";
 
 export default function Navbar() {
+  const [loadingConnect, setLoadingConnect] = useState<boolean>(false);
   const listen = useListen();
   const isOnWrongNetwork = useNetworkMismatch(); // Detect if the user is on the wrong network
   const { isSignedInQuery, profileQuery } = useLensUser();
   const { mutate: requestLogin } = useLogin();
 
+  const address = useAddress();
+
   const { isOpen, onToggle } = useDisclosure();
 
-  const {
-    connectMetamask,
-    loading: loadingMetamask,
-    disconnectMetamask,
-    address,
-  } = useMetamask();
+  // const {
+  //   connectMetamask,
+  //   loading: loadingMetamask,
+  //   disconnectMetamask,
+  //   address,
+  // } = useMetamask();
+
+  const connectWithMetamask = useMetamask();
+  const disconnect = useDisconnect();
 
   // const {
   //   dispatch,
@@ -144,7 +155,7 @@ export default function Navbar() {
               bgColor="brand.purple"
               textColor="white"
               // TODO: add disconnect handler
-              onClick={() => disconnectMetamask()}
+              onClick={() => disconnect()}
               _hover={{
                 opacity: 0.8,
               }}
@@ -155,13 +166,18 @@ export default function Navbar() {
             <Button
               bgColor="brand.purple"
               textColor="white"
-              onClick={connectMetamask}
+              // onClick={connectMetamask}
+              onClick={async () => {
+                setLoadingConnect(true);
+                await connectWithMetamask();
+                setLoadingConnect(false);
+              }}
               _hover={{
                 opacity: 0.8,
               }}
-              disabled={loadingMetamask}
+              disabled={loadingConnect}
             >
-              {loadingMetamask ? <Spinner /> : "Connect Wallet"}
+              {loadingConnect ? <Spinner /> : "Connect Wallet"}
             </Button>
           )}
 
@@ -180,6 +196,23 @@ export default function Navbar() {
             >
               Sign in with Lens
             </Button>
+          )}
+
+          {/* Display Lens Handle */}
+          {!profileQuery?.data?.defaultProfile &&
+            address &&
+            isSignedInQuery.data && (
+              <>
+                <Text color={"white"}>No Lens Profile.</Text>
+              </>
+            )}
+
+          {profileQuery?.data?.defaultProfile && (
+            <>
+              <Text color={"white"}>
+                {profileQuery?.data?.defaultProfile?.handle}
+              </Text>
+            </>
           )}
         </Stack>
       </Flex>
