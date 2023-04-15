@@ -4,6 +4,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 import { SdkLayout } from "@/components/SdkProvider";
 import { MetaMaskProvider } from "@/hooks/useMetamaskOld";
+import { ThirdwebProvider, ChainId } from "@thirdweb-dev/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const chakraTheme: ThemeConfig = extendTheme({
   styles: {
@@ -32,14 +34,22 @@ const chakraTheme: ThemeConfig = extendTheme({
   },
 });
 
+const desiredChainId = ChainId.Mumbai;
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <MetaMaskProvider>
-      <SdkLayout>
-        <ChakraProvider resetCSS theme={chakraTheme}>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </SdkLayout>
+      {/* @ts-ignore */}
+      <ThirdwebProvider desiredChainId={desiredChainId}>
+        <QueryClientProvider client={queryClient}>
+          <SdkLayout>
+            <ChakraProvider resetCSS theme={chakraTheme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </SdkLayout>
+        </QueryClientProvider>
+      </ThirdwebProvider>
     </MetaMaskProvider>
   );
 }

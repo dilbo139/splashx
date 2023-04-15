@@ -29,9 +29,15 @@ import React, { useEffect } from "react";
 import useMetamask from "@/hooks/useMetamask";
 import { useListen } from "@/hooks/useListen";
 import MetaMaskSDK from "@metamask/sdk";
+import { useNetworkMismatch } from "@thirdweb-dev/react";
+import useLensUser from "@/lib/auth/useLensUser";
+import useLogin from "@/lib/auth/useLogin";
 
 export default function Navbar() {
   const listen = useListen();
+  const isOnWrongNetwork = useNetworkMismatch(); // Detect if the user is on the wrong network
+  const { isSignedInQuery, profileQuery } = useLensUser();
+  const { mutate: requestLogin } = useLogin();
 
   const { isOpen, onToggle } = useDisclosure();
 
@@ -156,6 +162,23 @@ export default function Navbar() {
               disabled={loadingMetamask}
             >
               {loadingMetamask ? <Spinner /> : "Connect Wallet"}
+            </Button>
+          )}
+
+          {/* Sign In With Lens */}
+          {address && !isSignedInQuery.data && (
+            <Button
+              onClick={() => requestLogin()}
+              display={{ base: "end", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"brand.purple"}
+              _hover={{
+                bg: "pink.300",
+              }}
+            >
+              Sign in with Lens
             </Button>
           )}
         </Stack>
