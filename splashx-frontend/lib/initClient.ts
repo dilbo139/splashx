@@ -19,6 +19,7 @@ import {
 // Export a basic unauthenticated client for read operations
 export const basicClient = createUrqlClient({
   url: APIURL,
+  exchanges: [],
 });
 
 // Create an authenticated client on behalf of the current user.

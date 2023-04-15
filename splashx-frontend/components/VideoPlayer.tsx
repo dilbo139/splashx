@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 
 interface Props {
@@ -56,8 +57,9 @@ const VideoPlayer: React.FC<Props> = ({ videoUrl }) => {
       ) : (
         <button onClick={handlePlay}>Play</button>
       )}
-      <p>Time Spent: {timeSpent} seconds</p>
-      <p>Money Earned: ${moneyEarned.toFixed(2)}</p>
+
+      {/* <p>Time Spent: {timeSpent} seconds</p>
+      <p>Money Earned: ${moneyEarned.toFixed(2)}</p> */}
     </div>
   );
 };
