@@ -2,6 +2,8 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import { SdkLayout } from "@/components/SdkProvider";
+import { MetaMaskProvider } from "@/hooks/useMetamaskOld";
 
 const chakraTheme: ThemeConfig = extendTheme({
   styles: {
@@ -32,8 +34,12 @@ const chakraTheme: ThemeConfig = extendTheme({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider resetCSS theme={chakraTheme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <MetaMaskProvider>
+      <SdkLayout>
+        <ChakraProvider resetCSS theme={chakraTheme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </SdkLayout>
+    </MetaMaskProvider>
   );
 }

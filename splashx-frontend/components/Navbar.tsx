@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Image,
   Input,
+  Spinner,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -24,12 +25,55 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-import React from "react";
+import React, { useEffect } from "react";
+import useMetamask from "@/hooks/useMetamask";
+import { useListen } from "@/hooks/useListen";
+import MetaMaskSDK from "@metamask/sdk";
 
 export default function Navbar() {
+  const listen = useListen();
+
   const { isOpen, onToggle } = useDisclosure();
-  // TODO: replace with metamask address
-  const address = "0x1234567890";
+
+  const {
+    connectMetamask,
+    loading: loadingMetamask,
+    disconnectMetamask,
+    address,
+  } = useMetamask();
+
+  // const {
+  //   dispatch,
+  //   state: { status, isMetaMaskInstalled, wallet },
+  // } = useMetamask();
+
+  // can be passed to an onclick handler
+  // const connectMetamask = async () => {
+  //   console.log("connectingMetamask...");
+  //   const hasWindow = typeof window !== "undefined";
+  //   if (!hasWindow) return;
+
+  //   if (hasWindow) {
+  //     dispatch({ type: "loading" });
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_requestAccounts",
+  //       params: []
+  //     });
+
+  //     if (accounts.length > 0) {
+  //       const balance = await window.ethereum!.request({
+  //         method: "eth_getBalance",
+  //         params: [accounts[0], "latest"],
+  //       });
+  //       dispatch({ type: "connect", wallet: accounts[0], balance });
+
+  //       // we can register an event listener for changes to the users wallet
+  //       listen();
+  //     }
+  //   }
+  // };
+
+  // can be passed to an onclick handler
 
   return (
     <Box>
@@ -89,30 +133,31 @@ export default function Navbar() {
         >
           {/* Display current user's address */}
 
-          {address && (
+          {address ? (
             <Button
               bgColor="brand.purple"
               textColor="white"
               // TODO: add disconnect handler
-              onClick={() => console.log("disconnecting...")}
+              onClick={() => disconnectMetamask()}
               _hover={{
                 opacity: 0.8,
               }}
             >
               Disconnect Wallet
             </Button>
+          ) : (
+            <Button
+              bgColor="brand.purple"
+              textColor="white"
+              onClick={connectMetamask}
+              _hover={{
+                opacity: 0.8,
+              }}
+              disabled={loadingMetamask}
+            >
+              {loadingMetamask ? <Spinner /> : "Connect Wallet"}
+            </Button>
           )}
-          {/* TODO: Add Connect Wallet Button */}
-          <Button
-            bgColor="brand.red"
-            textColor="white"
-            onClick={() => console.log("disconnecting...")}
-            _hover={{
-              opacity: 0.8,
-            }}
-          >
-            Connect Wallet
-          </Button>
         </Stack>
       </Flex>
 
