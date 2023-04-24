@@ -17,6 +17,8 @@ import LivepeerPlayer from "./LivepeerPlayer";
 type Props = {
   author: string;
   playbackId: string;
+  thumbnailUrl: string;
+  videoTitle?: string;
 };
 
 const VideoCard = (props: Props) => {
@@ -25,13 +27,15 @@ const VideoCard = (props: Props) => {
       maxW="sm"
       bg="none"
       rounded={"md"}
-      className="ml-12 mt-6 bg-slate-800"
+      className="ml-12 mt-6  bg-slate-800"
     >
       <CardBody color={"white"}>
         <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          alt="Green double couch with wooden legs"
+          src={props.thumbnailUrl}
+          alt={props.videoTitle}
           borderRadius="lg"
+          w={300}
+          h={200}
         />
         {/* <LivepeerPlayer playbackId={props.playbackId} /> */}
         <Stack mt="6" spacing="3">

@@ -149,7 +149,6 @@ export default function Navbar() {
           align={"center"}
         >
           {/* Display current user's address */}
-
           {address ? (
             <Button
               bgColor="brand.brightBlue"
