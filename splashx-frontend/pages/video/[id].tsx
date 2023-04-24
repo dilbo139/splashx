@@ -196,7 +196,7 @@ const VideoDetail = (props: Props) => {
 
   return (
     <div className="flex flex-col items-center justify-center p-48 text-white">
-      <LivepeerPlayer />
+      <LivepeerPlayer posterImage={"/images/deathnote-poster.jpeg"} />
       {/* <VideoPlayer
         videoUrl={"https://lp-playback.com/hls/c93am2dgf19jh5r6/index.m3u8"}
       /> */}

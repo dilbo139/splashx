@@ -10,6 +10,7 @@ import {
   Text,
   Heading,
   Container,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import LivepeerPlayer from "./LivepeerPlayer";
@@ -58,6 +59,8 @@ const VideoCard = (props: Props) => {
           _hover={{ opacity: 0.8 }}
           flex={1}
           color="white"
+          as={Link}
+          href={`/video/${props.playbackId}`}
         >
           Watch
         </Button>
