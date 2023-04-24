@@ -47,7 +47,8 @@ export async function createClient() {
 
   // Create a new authenticated client with the new access token as the auth header
   const urqlClient = createUrqlClient({
-    url: APIURL,
+    url: LENS_API_URL,
+    exchanges: [],
     fetchOptions: {
       headers: {
         "x-access-token": `Bearer ${accessToken}`,
