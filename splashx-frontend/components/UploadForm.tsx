@@ -264,7 +264,7 @@ const UploadForm: React.FC = () => {
                     {loading ? "Loading..." : "Stake and Upload"}
                   </Button> */}
                 <Web3Button
-                  accentColor="#7554FA"
+                  // theme="light"
                   contractAddress={LENS_CONTRACT_ADDRESS}
                   contractAbi={LENS_CONTRACT_ABI}
                   action={async () => {
