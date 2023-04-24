@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import { Framework } from "@superfluid-finance/sdk-core";
 import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { Client } from "urql";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -17,6 +18,8 @@ const playbackIds: string[] = [
 ];
 
 const VideoDetail = (props: Props) => {
+  const router = useRouter();
+  const { playbackId } = router.query;
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
   const [moneyEarned, setMoneyEarned] = useState(0);
@@ -196,7 +199,10 @@ const VideoDetail = (props: Props) => {
 
   return (
     <div className="flex flex-col items-center justify-center p-48 text-white">
-      <LivepeerPlayer posterImage={"/images/deathnote-poster.jpeg"} />
+      <LivepeerPlayer
+        posterImage={"/images/deathnote-poster.jpeg"}
+        playbackId={playbackId as string}
+      />
       {/* <VideoPlayer
         videoUrl={"https://lp-playback.com/hls/c93am2dgf19jh5r6/index.m3u8"}
       /> */}

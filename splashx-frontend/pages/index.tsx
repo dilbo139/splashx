@@ -30,9 +30,9 @@ export default function Home() {
   console.log("publicationsData: ", publicationsData);
 
   const playbackIds: string[] = [
-    "0b71y791z0b1fobx",
-    "c93am2dgf19jh5r6",
-    "3952s8oa25gk57sw",
+    "3a7aakaz3eopat45",
+    "289cecpv4e57kjtb",
+    "062232w66x4s98bm",
   ];
 
   const thumbnailUrls = [

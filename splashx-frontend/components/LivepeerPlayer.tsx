@@ -13,11 +13,15 @@ const PosterImage = () => {
 const playbackId =
   "bafybeigtqixg4ywcem3p6sitz55wy6xvnr565s6kuwhznpwjices3mmxoe";
 
-export default function LivepeerPlayer(props: { posterImage: string }) {
+export default function LivepeerPlayer(props: {
+  posterImage: string;
+  playbackId: string;
+}) {
   return (
     <Player
       title="Waterfalls"
-      playbackId={"c93am2dgf19jh5r6"}
+      // playbackId={"c93am2dgf19jh5r6"}
+      playbackId={props.playbackId}
       loop
       autoPlay
       showTitle={false}

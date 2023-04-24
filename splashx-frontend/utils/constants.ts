@@ -1333,3 +1333,21 @@ export const LENS_CONTRACT_ABI = [
     type: "function",
   },
 ];
+
+export const ANIME_TRAILER_URLS = [
+  {
+    id: 1,
+    title: "Death Note",
+    url: "https://www.youtube.com/watch?v=NlJZ-YgAt-c",
+  },
+  {
+    id: 2,
+    title: "Attack On Titan",
+    url: "https://www.youtube.com/watch?v=MGRm4IzK1SQ",
+  },
+  {
+    id: 3,
+    title: "One Piece",
+    url: "https://www.youtube.com/watch?v=S8_YwFLCh4U",
+  },
+];
