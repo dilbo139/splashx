@@ -3,7 +3,8 @@ import refreshAccessToken from "@/lib/auth/refreshAccessToken";
 import {
   LENS_CONTRACT_ADDRESS as LENS_HUB_CONTRACT_ADDRESS,
   STORAGE_KEY,
-  LENS_API_URL as APIURL,
+  // LENS_API_URL as APIURL,
+  LENS_API_URL,
 } from "@/utils/constants";
 
 // The base graphql endpoint
@@ -18,7 +19,7 @@ import {
 
 // Export a basic unauthenticated client for read operations
 export const basicClient = createUrqlClient({
-  url: APIURL,
+  url: LENS_API_URL,
   exchanges: [],
 });
 
